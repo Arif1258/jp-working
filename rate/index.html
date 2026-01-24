@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rate Limiter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h3>Rate Limiter System</h3>
+
+<p>Enter commands (one per line):</p>
+
+<textarea id="input">
+INIT 3 10
+REQUEST user1 1
+REQUEST user1 2
+REQUEST user1 3
+REQUEST user1 4
+STATUS user1
+</textarea>
+
+<br>
+<button onclick="run()">Run</button>
+
+<pre id="output"></pre>
+
+<script src="script.js"></script>
+</body>
+</html>

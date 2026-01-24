@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Juspay Payment System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Juspay Wallet</div>
+    </nav>
+
+    <div class="container">
+      <h2>Mini Payment Gateway</h2>
+      <p class="subtitle">Enter commands (one per line)</p>
+
+      <textarea id="input">
+CREATE_CUSTOMER C1 1000
+CREATE_MERCHANT M1
+PAY C1 M1 200
+TOP_MERCHANTS 1
+    </textarea>
+
+      <button onclick="run()">Run</button>
+
+      <pre id="output"></pre>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
