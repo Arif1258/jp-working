@@ -41,15 +41,12 @@ class Node {
     }
 }
 
-
-// lock
 class LockingTree {
 
     public static boolean lock(Node node) {
         if (node.isLocked() || node.lockedChildCount > 0) {
             return false;
         }
-
 
         Node curr = node.getParent();
         while (curr != null) {
@@ -58,7 +55,6 @@ class LockingTree {
             }
             curr = curr.getParent();
         }
-
 
         curr = node.getParent();
         while (curr != null) {
@@ -70,15 +66,10 @@ class LockingTree {
         return true;
     }
 
-
-
-    // unlock
-
     public static boolean unlock(Node node) {
         if (!node.isLocked()) {
             return false;
         }
-
 
         Node curr = node.getParent();
         while (curr != null) {
@@ -88,5 +79,33 @@ class LockingTree {
 
         node.unlockNode();
         return true;
+    }
+}
+
+public class Arif {
+
+    public static void main(String[] args) {
+
+        Node A = new Node(1, null);
+        Node B = new Node(2, A);
+        Node C = new Node(3, A);
+        Node D = new Node(4, B);
+        Node E = new Node(5, B);
+
+        /*
+                A
+               / \
+              B   C
+             / \
+            D   E
+        */
+
+        System.out.println(LockingTree.lock(D));
+        System.out.println(LockingTree.lock(B)); 
+        System.out.println(LockingTree.lock(A)); 
+        System.out.println(LockingTree.lock(C));
+        System.out.println(LockingTree.unlock(D));
+        System.out.println(LockingTree.lock(B));
+        System.out.println(LockingTree.lock(A));
     }
 }
