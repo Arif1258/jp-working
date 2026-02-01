@@ -46,12 +46,11 @@ class Node {
 class LockingTree {
 
     public static boolean lock(Node node) {
-        // Condition 1: node already locked OR has locked descendants
         if (node.isLocked() || node.lockedChildCount > 0) {
             return false;
         }
 
-        // Condition 2: no locked ancestor
+
         Node curr = node.getParent();
         while (curr != null) {
             if (curr.isLocked()) {
@@ -60,7 +59,7 @@ class LockingTree {
             curr = curr.getParent();
         }
 
-        // Lock is allowed → update ancestors
+
         curr = node.getParent();
         while (curr != null) {
             curr.lockedChildCount++;
@@ -80,7 +79,7 @@ class LockingTree {
             return false;
         }
 
-        // Update ancestors
+
         Node curr = node.getParent();
         while (curr != null) {
             curr.lockedChildCount--;

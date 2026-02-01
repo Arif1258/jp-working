@@ -27,21 +27,21 @@ class ConcurrentLockingTree {
     public static boolean lock(Node node) {
         List<Node> path = new ArrayList<>();
 
-        // Step 1: collect path to root
+
         Node curr = node;
         while (curr != null) {
             path.add(curr);
             curr = curr.parent;
         }
 
-        // Step 2: lock from root → node (strict order)
+
         Collections.reverse(path);
         for (Node n : path) {
             n.mutex.lock();
         }
 
         try {
-            // Check conditions
+
             if (node.locked || node.lockedChildCount > 0) {
                 return false;
             }
@@ -52,7 +52,7 @@ class ConcurrentLockingTree {
                 }
             }
 
-            // Perform lock
+
             node.locked = true;
             for (int i = 0; i < path.size() - 1; i++) {
                 path.get(i).lockedChildCount++;
@@ -60,7 +60,7 @@ class ConcurrentLockingTree {
 
             return true;
         } finally {
-            // Step 3: unlock in reverse order
+
             for (int i = path.size() - 1; i >= 0; i--) {
                 path.get(i).mutex.unlock();
             }
